@@ -23,12 +23,14 @@ public class CustomerRepository : IRepository<Customer>
 
     public async Task AddAsync(Customer entity)
     {
+        entity.createdAt = DateTime.Now;
         await _context.customer.AddAsync(entity);
         await _context.SaveChangesAsync();
     }
 
     public async Task UpdateAsync(Customer entity)
     {
+        entity.modifiedAt = DateTime.Now;
         _context.customer.Update(entity);
         await _context.SaveChangesAsync();
     }
